@@ -1,5 +1,6 @@
 const User = require('./user')
 const Grow = require('./grow')
+const Labor = require('./labor')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -14,7 +15,11 @@ const Grow = require('./grow')
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+Grow.belongsTo(User); 
+User.hasMany(Grow); 
 module.exports = {
   User, 
-  Grow
+  Grow, 
+  Labor
 }

@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import AddGrow from './AddGrow'
+import GrowTable from './GrowTable'
 import { getGrowItems } from '../store'
 import {connect} from 'react-redux'
 
@@ -11,12 +13,20 @@ import {connect} from 'react-redux'
 class Marketplace extends Component {
     constructor(){ 
         super(); 
-        this.state = {}
+        this.state={
+            display: ''
+        }
+        this.handleClick = this.handleClick.bind(this); 
     }
-
     componentDidMount(){ 
         this.props.getGrowItems();
         console.log('comp did mount props', this.props)
+
+    }
+
+    handleClick(evt){ 
+        console.log('evttarget', evt.target.value)
+        this.setState({display: evt.target.value})
 
     }
 
@@ -25,23 +35,12 @@ class Marketplace extends Component {
         console.log(this.props); 
         return ( 
             <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Item</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                        </tr>
-                    
-                    {this.props.grow ? this.props.grow.map(item =>(
-                        <tr key={item.id}>
-                            <td>{item.item}</td>
-                            <td>{item.quantity}</td>
-                            <td>{item.price}</td>
-                        </tr>
-                    )): null}
-                    </tbody>
-                </table>
+                <span><button type="button" value="Grow" onClick={this.handleClick}>Grow</button><button type="button" value="Labor" onClick={this.handleClick}>Labor</button><button type="button" value="Exchange" onClick={this.handleClick}>Exchange</button></span>
+                {this.state.display === "Grow" ? (<div><GrowTable user={this.props.user} grow={this.props.grow}/> <AddGrow /></div>)  : null}
+                {this.state.display === "Labor" ? (<div>labor</div>)  : null}
+                {this.state.display === "Exchange" ? (<div>exchange</div>)  : null}
+                
+                
             </div>
         )
     }
@@ -49,7 +48,8 @@ class Marketplace extends Component {
 }
 
 const mapStateToProps = state => ({ 
-    grow: state.grow.growItems
+    grow: state.grow.growItems,
+    user: state.user.id
 })
 
 const mapDispatchToProps = dispatch => ({ 

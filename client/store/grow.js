@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GOT_GROW_ITEMS = 'GOT_GROW_ITEMS'
+const ADDED_GROW_ITEM = 'ADDED_GROW_ITEM'
 
 /**
  * INITIAL STATE
@@ -16,6 +17,7 @@ const initalState = {
  * ACTION CREATORS
  */
 const gotGrowItems = items => ({type: GOT_GROW_ITEMS, items})
+// const addedGrowItem = item => ({type: ADDED_GROW_ITEM, item})
 
 
 /**
@@ -32,6 +34,16 @@ export const getGrowItems = () => async dispatch => {
     }
 }
 
+export const addGrowItem = (item, quantity, price, userId) => async dispatch => { 
+    try {
+        const res = await axios.post('api/grow', {item, quantity, price, userId})
+        const res2 = await axios.get('api/grow')
+        dispatch(gotGrowItems(res2.data))
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 /**
  * REDUCER
  */
@@ -39,6 +51,8 @@ export default function(state = initalState, action) {
   switch (action.type) {
     case GOT_GROW_ITEMS:
       return {...state, growItems: action.items}
+    // case ADDED_GROW_ITEM: 
+    //     return {...state, growItems: action.items}
     default:
       return state
   }
