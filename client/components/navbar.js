@@ -14,6 +14,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <a className="navbar-brand" id="navtitle">🌿 homegrow circular economy 🌿</a>
           <Link  to="/home"><button type="button" class="btn btn-success">Home</button></Link>
           <Link  to="/marketplace"><button type="button" class="btn btn-success">Marketplace</button></Link>
+          <Link  to="/test"><button type="button" class="btn btn-success">Test</button></Link>
           <a href="#"  onClick={handleClick}>
           <button type="button" class="btn btn-success">Logout</button>
           </a>
@@ -23,6 +24,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
           <Link to="/marketplace">Marketplace</Link>
+          <Link  to="/test"><button type="button" class="btn btn-success">Test</button></Link>
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
