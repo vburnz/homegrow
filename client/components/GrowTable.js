@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 // import {connect} from 'react-redux'
 
 const GrowTable = (props) => {
+    console.log(props)
     return (
         <div>
             <table>
@@ -25,7 +26,7 @@ const GrowTable = (props) => {
                                 {props.user === item.userId ? 
                                 <button>remove listing</button> 
                                 : 
-                                <span><input type="number" min="1" max={item.quantity}/><button>add to cart</button></span>
+                                <span><input type="number" min="1" max={item.quantity}/><button onClick={() => props.sendMoney('0x67fd37f1078fDCB5FF9D85BacDb8a61aB9f89956', item.user.ethAddress, item.price )}>buy</button></span>
                                 }
                             </td>
                         </tr>

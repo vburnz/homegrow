@@ -3,6 +3,7 @@ import AddGrow from './AddGrow'
 import GrowTable from './GrowTable'
 import { getGrowItems } from '../store'
 import {connect} from 'react-redux'
+import HOC from './App'
 
 //marketplace to have a few tabs 
     //food 
@@ -36,9 +37,10 @@ class Marketplace extends Component {
         return ( 
             <div>
                 <span><button type="button" value="Grow" onClick={this.handleClick}>Grow</button><button type="button" value="Labor" onClick={this.handleClick}>Labor</button><button type="button" value="Exchange" onClick={this.handleClick}>Exchange</button></span>
-                {this.state.display === "Grow" ? (<div><GrowTable user={this.props.user} grow={this.props.grow}/> <AddGrow /></div>)  : null}
+                {this.state.display === "Grow" ? (<div><GrowTable user={this.props.user} grow={this.props.grow} sendMoney={this.props.sendMoney}/> <AddGrow /></div>)  : null}
                 {this.state.display === "Labor" ? (<div>labor</div>)  : null}
                 {this.state.display === "Exchange" ? (<div>exchange</div>)  : null}
+                <button onClick={this.props.mintMoney}>Mint Money</button>
                 
                 
             </div>
@@ -56,5 +58,5 @@ const mapDispatchToProps = dispatch => ({
     getGrowItems: () => dispatch(getGrowItems())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Marketplace); 
+export default connect(mapStateToProps, mapDispatchToProps)(HOC(Marketplace)); 
 

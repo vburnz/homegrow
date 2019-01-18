@@ -2357,12 +2357,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xfC508B3c6C1859Fc9200b7cfD177B351A54cFCDa",
-      "transactionHash": "0x5704d9050fba2604dc583579c28df36b349d3f2edec2b5b96c2045c06ea861bc"
+      "address": "0xdf99aE2EC3de57BF2268F3a5461f01c9D0C6D527",
+      "transactionHash": "0xa355d41292475b3cbbc11008dd4950b26dcf506577d143b5588c77b557ebc2ab"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-01-15T17:05:05.244Z",
+  "updatedAt": "2019-01-18T20:20:00.658Z",
   "devdoc": {
     "methods": {}
   },
