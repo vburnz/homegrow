@@ -3,7 +3,7 @@ import AddGrow from './AddGrow'
 import GrowTable from './GrowTable'
 import { getGrowItems } from '../store'
 import {connect} from 'react-redux'
-import HOC from './App'
+import ContractComponent from './ContractComponent'
 
 //marketplace to have a few tabs 
     //food 
@@ -37,7 +37,7 @@ class Marketplace extends Component {
         return ( 
             <div>
                 <span><button type="button" value="Grow" onClick={this.handleClick}>Grow</button><button type="button" value="Labor" onClick={this.handleClick}>Labor</button><button type="button" value="Exchange" onClick={this.handleClick}>Exchange</button></span>
-                {this.state.display === "Grow" ? (<div><GrowTable user={this.props.user} grow={this.props.grow} sendMoney={this.props.sendMoney}/> <AddGrow /></div>)  : null}
+                {this.state.display === "Grow" ? (<div><GrowTable user={this.props.user} grow={this.props.grow} sendMoney={this.props.sendMoney} address={this.props.address}/> <AddGrow /></div>)  : null}
                 {this.state.display === "Labor" ? (<div>labor</div>)  : null}
                 {this.state.display === "Exchange" ? (<div>exchange</div>)  : null}
                 <button onClick={this.props.mintMoney}>Mint Money</button>
@@ -51,12 +51,13 @@ class Marketplace extends Component {
 
 const mapStateToProps = state => ({ 
     grow: state.grow.growItems,
-    user: state.user.id
+    user: state.user.id, 
+    address: state.user.ethAddress
 })
 
 const mapDispatchToProps = dispatch => ({ 
     getGrowItems: () => dispatch(getGrowItems())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(HOC(Marketplace)); 
+export default connect(mapStateToProps, mapDispatchToProps)(ContractComponent(Marketplace)); 
 

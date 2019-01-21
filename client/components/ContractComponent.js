@@ -5,7 +5,7 @@ import getWeb3 from "./utils/getWeb3";
 
 // import "./App.css";
 
-const HOC = OtherComponent => {
+const ContractComponent = OtherComponent => {
   return class Contract extends Component {
     state = { storageValue: 0, web3: null, accounts: null, contract: null, balance: null };
 
@@ -100,6 +100,8 @@ const HOC = OtherComponent => {
         return <div>Loading Web3, accounts, and contract...</div>;
       }
       return (
+        // <h3>current ethAddress: {this.state.accounts}</h3>
+        // <h4>current ethBalance: {this.state.</h4>
         <OtherComponent 
           {...this.props}
           {...this.state}
@@ -127,4 +129,4 @@ const HOC = OtherComponent => {
   }
 }
 
-export default HOC;
+export default ContractComponent;

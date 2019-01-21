@@ -26,7 +26,13 @@ const GrowTable = (props) => {
                                 {props.user === item.userId ? 
                                 <button>remove listing</button> 
                                 : 
-                                <span><input type="number" min="1" max={item.quantity}/><button onClick={() => props.sendMoney('0x67fd37f1078fDCB5FF9D85BacDb8a61aB9f89956', item.user.ethAddress, item.price )}>buy</button></span>
+                                <span>
+                                    <input type="number" min="1" max={item.quantity}/>
+                                    <button onClick={() => {
+                                        props.sendMoney(props.address, item.user.ethAddress, item.price ); 
+                                        //function that decrements amount in store 
+                                    }}>buy</button>
+                                    </span>
                                 }
                             </td>
                         </tr>
