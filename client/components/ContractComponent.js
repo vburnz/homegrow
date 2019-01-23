@@ -101,7 +101,7 @@ const ContractComponent = OtherComponent => {
       }
       return (
         // <h3>current ethAddress: {this.state.accounts}</h3>
-        // <h4>current ethBalance: {this.state.</h4>
+        // <h4>current ethBalance: {this.state.address[0]}</h4>
         <OtherComponent 
           {...this.props}
           {...this.state}
@@ -129,4 +129,5 @@ const ContractComponent = OtherComponent => {
   }
 }
 
-export default ContractComponent;
+export default ContractComponent; 
+

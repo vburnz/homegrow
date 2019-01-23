@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GOT_GROW_ITEMS = 'GOT_GROW_ITEMS'
 const ADDED_GROW_ITEM = 'ADDED_GROW_ITEM'
+const REMOVED_GROW_ITEM = 'REMOVED_GROW_ITEM'
 
 /**
  * INITIAL STATE
@@ -18,6 +19,7 @@ const initalState = {
  */
 const gotGrowItems = items => ({type: GOT_GROW_ITEMS, items})
 // const addedGrowItem = item => ({type: ADDED_GROW_ITEM, item})
+const removeGrowItem = itemId => ({type: REMOVED_GROW_ITEM, itemId})
 
 
 /**
@@ -43,6 +45,14 @@ export const addGrowItem = (item, quantity, price, userId) => async dispatch => 
         console.error(error)
     }
 }
+export const deleteGrowItem = (itemId) => async dispatch => {
+    try {
+        const res = await axios.delete(`/api/grow/${itemId}`); 
+        dispatch(removeGrowItem)
+    } catch (error) {
+        console.error(error);    
+    }
+}
 
 /**
  * REDUCER
@@ -53,6 +63,8 @@ export default function(state = initalState, action) {
       return {...state, growItems: action.items}
     // case ADDED_GROW_ITEM: 
     //     return {...state, growItems: action.items}
+    case REMOVED_GROW_ITEM: 
+        return {...state, growItems: state.growItems.filter(item => item.id !== Number(action.itemId))}
     default:
       return state
   }

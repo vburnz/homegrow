@@ -15,3 +15,9 @@ router.post('/', (req, res, next) => {
         .then(item => res.json(item))
         .catch(next); 
 })
+
+router.delete('/:itemId', async (req, res, next) => {
+    Grow.destroy({where: {id: req.params.itemId}})
+        .then(()=> res.status(204).end())
+        .catch(next); 
+})
