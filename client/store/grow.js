@@ -48,7 +48,7 @@ export const addGrowItem = (item, quantity, price, userId) => async dispatch => 
 export const deleteGrowItem = (itemId) => async dispatch => {
     try {
         const res = await axios.delete(`/api/grow/${itemId}`); 
-        dispatch(removeGrowItem)
+        dispatch(removeGrowItem(itemId))
     } catch (error) {
         console.error(error);    
     }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-// import { getGrowItems, addGrowItem } from '../store'
-// import {connect} from 'react-redux'
+import { getGrowItems, deleteGrowItem, buyGrowItem } from '../store'
+import {connect} from 'react-redux'
 
 class GrowTable extends Component {
     constructor(){
@@ -10,8 +10,18 @@ class GrowTable extends Component {
             selectedQuantity: null
         }
     }
+    componentDidMount(){
+        this.props.getGrowItems(); 
+    }
+    handleBuy(item, quantity){ 
+        this.props.sendMoney(this.props.address, item.user.ethAddress, item.price ); 
+        //decrement database 
+        this.props.buyGrowItem(item, quantity); 
+    }
+
     render(){
         console.log('selected item', this.state.selectedItem)
+        console.log(this.props); 
         
         return (
             <div>
@@ -26,7 +36,6 @@ class GrowTable extends Component {
                             </tr>
                         
                         {this.props.grow ? this.props.grow.map(item =>(
-
                             <tr key={item.id}>
                                 <td>{item.item}</td>
                                 <td>{item.quantity}</td>
@@ -41,15 +50,9 @@ class GrowTable extends Component {
                                 
                                     (<span>
                                         <input type="number" min="1" max={item.quantity} onChange={(evt)=> this.setState({selectedQuantity: evt.target.value})}/>
-                                        <button onClick={() => {
-                                            this.props.sendMoney(this.props.address, item.user.ethAddress, item.price ); 
-                                            //function that decrements amount in store 
-                                        }}>buy {this.state.selectedQuantity} {this.state.selectedItem} for {(item.price/100).toFixed(2) * this.state.selectedQuantity} CC</button>
+                                        <button onClick={() => handleBuy(item) }>buy {this.state.selectedQuantity} {this.state.selectedItem} for {((item.price/100)* this.state.selectedQuantity).toFixed(2)} CC</button>
                                     </span>) 
                                     : <button onClick={()=>{this.setState({selectedItem: item.item, selectedQuantity: 0})}}>Select</button>
-                                    
-                                    
-                                    
                                 )
                                 }
                                 </td>
@@ -64,4 +67,16 @@ class GrowTable extends Component {
 }
 
 
-export default GrowTable; 
+const mapStateToProps = state => ({ 
+    grow: state.grow.growItems,
+    user: state.user.id
+})
+
+const mapDispatchToProps = dispatch => ({ 
+    getGrowItems: () => dispatch(getGrowItems()), 
+    deleteGrowItem: (itemId) =>dispatch(deleteGrowItem(itemId)), 
+    buyGrowItem: (itemId, quantity) => dispatch(buyGrowItem(itemId, quantity)); 
+    
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GrowTable); 

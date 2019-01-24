@@ -20,25 +20,29 @@ class Marketplace extends Component {
         }
         this.handleClick = this.handleClick.bind(this); 
     }
-    componentDidMount(){ 
-        this.props.getGrowItems();
-        console.log('comp did mount props', this.props)
-
-    }
 
     handleClick(evt){ 
-        console.log('evttarget', evt.target.value)
         this.setState({display: evt.target.value})
 
     }
 
     render() { 
-        console.log('its the marketplace!')
-        console.log(this.props); 
         return ( 
             <div>
-                <span><button type="button" value="Grow" onClick={this.handleClick}>Grow</button><button type="button" value="Labor" onClick={this.handleClick}>Labor</button><button type="button" value="Exchange" onClick={this.handleClick}>Exchange</button></span>
-                {this.state.display === "Grow" ? (<div><GrowTable user={this.props.user} grow={this.props.grow} sendMoney={this.props.sendMoney} address={this.props.address} deleteGrowItem={this.props.deleteGrowItem}/> <AddGrow /></div>)  : null}
+                <span>
+                    <button type="button" value="Grow" onClick={this.handleClick}>Grow</button>
+                    <button type="button" value="Labor" onClick={this.handleClick}>Labor</button>
+                    <button type="button" value="Exchange" onClick={this.handleClick}>Exchange</button>
+                </span>
+                {this.state.display === "Grow" ? 
+                (<div>
+                    <GrowTable 
+                        user={this.props.user} 
+                        sendMoney={this.props.sendMoney} 
+                        address={this.props.address} 
+                    /> 
+                    <AddGrow />
+                </div>)  : null}
                 {this.state.display === "Labor" ? (<div>labor</div>)  : null}
                 {this.state.display === "Exchange" ? (<div>exchange</div>)  : null}
                 <button onClick={this.props.mintMoney}>Mint Money</button>
@@ -50,15 +54,13 @@ class Marketplace extends Component {
 
 }
 
-const mapStateToProps = state => ({ 
-    grow: state.grow.growItems,
+const mapStateToProps = state => ({
     user: state.user.id, 
     address: state.user.ethAddress
 })
 
 const mapDispatchToProps = dispatch => ({ 
-    getGrowItems: () => dispatch(getGrowItems()), 
-    deleteGrowItem: (itemId) =>dispatch(deleteGrowItem(itemId))
+
     
 })
 
