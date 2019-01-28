@@ -9,14 +9,16 @@ class GrowTable extends Component {
             selectedItem: null, 
             selectedQuantity: null
         }
+        this.handleBuy = this.handleBuy.bind(this); 
     }
     componentDidMount(){
         this.props.getGrowItems(); 
     }
     handleBuy(item, quantity){ 
-        this.props.sendMoney(this.props.address, item.user.ethAddress, item.price ); 
+        // this.props.sendMoney(this.props.address, item.user.ethAddress, item.price ); 
         //decrement database 
-        this.props.buyGrowItem(item, quantity); 
+        this.props.buyGrowItem(item.id, quantity); 
+        this.setState({selectedItem: null, selectedQuantity: null})
     }
 
     render(){
@@ -25,14 +27,14 @@ class GrowTable extends Component {
         
         return (
             <div>
-                <table>
+                <table className="table table-dark grow-table">
                         <tbody>
                             <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Sold By</th>
-                                <th>Add to Cart</th>
+                                <th scope="col">Item</th>
+                                <th scope ="col">Quantity</th>
+                                <th scope ="col">Price</th>
+                                <th scope ="col">Sold By</th>
+                                <th scope ="col">Add to Cart</th>
                             </tr>
                         
                         {this.props.grow ? this.props.grow.map(item =>(
@@ -43,16 +45,16 @@ class GrowTable extends Component {
                                 <td>{item.user.name}</td>
                                 <td>
                                 {this.props.user === item.userId ? 
-                                <button onClick={()=>this.props.deleteGrowItem(item.id)}>remove listing</button> 
+                                <button className="btn btn-success" onClick={()=>this.props.deleteGrowItem(item.id)}>remove listing</button> 
                                 : 
                                 ( 
                                 this.state.selectedItem === item.item ? 
                                 
                                     (<span>
                                         <input type="number" min="1" max={item.quantity} onChange={(evt)=> this.setState({selectedQuantity: evt.target.value})}/>
-                                        <button onClick={() => handleBuy(item) }>buy {this.state.selectedQuantity} {this.state.selectedItem} for {((item.price/100)* this.state.selectedQuantity).toFixed(2)} CC</button>
+                                        <button className="btn btn-success" onClick={() => this.handleBuy(item, this.state.selectedQuantity) }>buy {this.state.selectedQuantity} {this.state.selectedItem} for {((item.price/100)* this.state.selectedQuantity).toFixed(2)} CC</button>
                                     </span>) 
-                                    : <button onClick={()=>{this.setState({selectedItem: item.item, selectedQuantity: 0})}}>Select</button>
+                                    : <button className="btn btn-success" onClick={()=>{this.setState({selectedItem: item.item, selectedQuantity: 0})}}>Select</button>
                                 )
                                 }
                                 </td>
@@ -75,7 +77,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({ 
     getGrowItems: () => dispatch(getGrowItems()), 
     deleteGrowItem: (itemId) =>dispatch(deleteGrowItem(itemId)), 
-    buyGrowItem: (itemId, quantity) => dispatch(buyGrowItem(itemId, quantity)); 
+    buyGrowItem: (itemId, quantity) => dispatch(buyGrowItem(itemId, quantity)) 
     
 })
 

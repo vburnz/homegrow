@@ -12,9 +12,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <a className="navbar-brand" id="navtitle">🌿 homegrow circular economy 🌿</a>
-          <Link  to="/home"><button type="button" class="btn btn-success">Home</button></Link>
-          <Link  to="/marketplace"><button type="button" class="btn btn-success">Marketplace</button></Link>
-          <Link  to="/test"><button type="button" class="btn btn-success">Test</button></Link>
+          <Link  to="/home" className="btn btn-success">Home</Link>
+          <Link  to="/marketplace" className="btn btn-success">Marketplace</Link>
           <a href="#"  onClick={handleClick}>
           <button type="button" class="btn btn-success">Logout</button>
           </a>
@@ -22,10 +21,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/marketplace">Marketplace</Link>
-          <Link  to="/test"><button type="button" class="btn btn-success">Test</button></Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/login" className="btn btn-success">Login</Link>
+          <Link to="/marketplace" className="btn btn-success">Marketplace</Link>
+          <Link to="/signup" className="btn btn-success">Sign Up</Link>
         </div>
       )}
     </nav>

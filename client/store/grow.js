@@ -54,6 +54,18 @@ export const deleteGrowItem = (itemId) => async dispatch => {
     }
 }
 
+export const buyGrowItem = (itemId, quantity) => async dispatch => { 
+    try {
+        console.log('itemId', itemId)
+        const res = await axios.put(`/api/grow/${itemId}`, {quantity}); 
+        console.log(res); 
+        const res2 = await axios.get('/api/grow')
+        dispatch(gotGrowItems(res2.data)); 
+    } catch (error) {
+        console.error(error); 
+    }
+}
+
 /**
  * REDUCER
  */

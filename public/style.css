@@ -52,6 +52,16 @@ table, th, td {
   padding-right: 10px; 
 }
 
+.market-button{ 
+  margin-left: 10px; 
+  margin-top: 20px; 
+}
+
+.grow-table{
+  margin: 30px; 
+  /* margin-right: 30px;  */
+}
+
 @media (min-width: 768px) {
   .navbar-nav {
     width: 100%;

@@ -30,9 +30,9 @@ class Marketplace extends Component {
         return ( 
             <div>
                 <span>
-                    <button type="button" value="Grow" onClick={this.handleClick}>Grow</button>
-                    <button type="button" value="Labor" onClick={this.handleClick}>Labor</button>
-                    <button type="button" value="Exchange" onClick={this.handleClick}>Exchange</button>
+                    <button type="button" className="btn btn-success market-button" value="Grow" onClick={this.handleClick}>Grow</button>
+                    <button type="button" className="btn btn-success market-button" value="Labor" onClick={this.handleClick}>Labor</button>
+                    <button type="button" className="btn btn-success market-button" value="Exchange" onClick={this.handleClick}>Exchange</button>
                 </span>
                 {this.state.display === "Grow" ? 
                 (<div>
@@ -45,7 +45,7 @@ class Marketplace extends Component {
                 </div>)  : null}
                 {this.state.display === "Labor" ? (<div>labor</div>)  : null}
                 {this.state.display === "Exchange" ? (<div>exchange</div>)  : null}
-                <button onClick={this.props.mintMoney}>Mint Money</button>
+                <button className="btn btn-success market-button" onClick={this.props.mintMoney}>Mint Money</button>
                 
                 
             </div>
