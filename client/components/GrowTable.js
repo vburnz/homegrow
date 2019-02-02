@@ -15,7 +15,7 @@ class GrowTable extends Component {
         this.props.getGrowItems(); 
     }
     handleBuy(item, quantity){ 
-        // this.props.sendMoney(this.props.address, item.user.ethAddress, item.price ); 
+        this.props.sendMoney(this.props.address, item.user.ethAddress, item.price ); 
         //decrement database 
         this.props.buyGrowItem(item.id, quantity); 
         this.setState({selectedItem: null, selectedQuantity: null})
