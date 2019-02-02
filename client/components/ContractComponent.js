@@ -32,7 +32,7 @@ const ComposedContractComponent = OtherComponent => {
         //console.log(deployedNetwork.address); 
         const instance = new web3.eth.Contract(
           Homegrow.abi,
-          deployedNetwork && deployedNetwork.address,
+          deployedNetwork && deployedNetwork.address, 
         );
         // console.log(instance); 
 
